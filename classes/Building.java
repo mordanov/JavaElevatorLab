@@ -9,21 +9,20 @@ import java.util.*;
 public class Building extends Outputter implements Runnable {
     protected List<Floor> floors = new ArrayList<>();           // этажи
     protected List<Elevator> elevators = new ArrayList<>();     // лифты
-    protected final int passcount;                              // сколько создать пассажиров в здании
+    private final int passcount;                                // сколько создать пассажиров в здании
     protected final int capacity;                               // вместимость лифтов
     private final int source;                                   // на каком этаже создаются пассажиры (0 - на случайном)
-    private final int destination;                               // на каком этаже выгружаются пассажиры (0 - на случайном)
-    protected long passid = 1000;                               // id пассажиров
-    protected int elevid = 200;                                 // id лифтов
+    private final int destination;                              // на каком этаже выгружаются пассажиры (0 - на случайном)
+    private long passid = 1000;                                 // начальный id пассажиров
+    protected int elevid = 200;                                 // начальный id лифтов
 
-    private Thread t;
     protected int floorcount;
     protected int elevcount;
     private boolean passGeneratorActive = false;
 
     private final long buildingCreateTime = Calendar.getInstance().getTimeInMillis();
 
-    private NameGenerator names;
+    private NameGenerator names;                                // генератор имен и фамилий пассажиров + сборщик статистики
 
     public boolean isPassGeneratorActive() {
         return passGeneratorActive;
@@ -44,7 +43,7 @@ public class Building extends Outputter implements Runnable {
             addFloor(i + 1);
             outprintf("Добавлен новый этаж: %d\n", i+1);
         }
-        t = new Thread(this, "Здание с лифтами");
+        Thread t = new Thread(this, "Здание с лифтами");
         for(int i=0;i<elevcount;i++)
             addElevator(i + 1);
         t.start();
@@ -57,14 +56,6 @@ public class Building extends Outputter implements Runnable {
     public Building addFloor(int number) {
         floors.add(floorGenerator(number));
         return this;
-    }
-
-    public int getFloorcount() {
-        return floorcount;
-    }
-
-    public int getElevcount() {
-        return elevcount;
     }
 
     protected Elevator elevatorGenerator(int number) {
@@ -84,10 +75,10 @@ public class Building extends Outputter implements Runnable {
     public Passenger generatePassenger() {
         Floor f0, f1;
 
-        if(source==0) {
-            f0 = floors.get(getRandomFloor()); // откуда едет
+        if(source==0) {                                   // если задано, что этаж выбирается случайно
+            f0 = floors.get(getRandomFloor());            // откуда едет
             if(destination==0) {
-                f1 = floors.get(getRandomFloor()); // куда едет
+                f1 = floors.get(getRandomFloor());        // куда едет
                 while (f1.equals(f0))                     // не едет ли на этаж, с которого стартовал
                     f1 = floors.get(getRandomFloor());
             }
@@ -114,6 +105,7 @@ public class Building extends Outputter implements Runnable {
         return p;
     }
 
+    // пустой класс - Fx класс рисует пассажира
     protected void drawPassenger(Passenger p) {};
 
     public int getPasscount() {
@@ -124,6 +116,9 @@ public class Building extends Outputter implements Runnable {
         return r;
     }
 
+    // проверка - есть ли еще работающие лифты
+    // вызывается когда пассажиров больше не осталось
+    // если работающих лифтов нет и пассажиров нет - закончить выполнение
     public boolean checkActiveElevators(Elevator elevator) {
         boolean active = true;
         boolean allstopped = false;

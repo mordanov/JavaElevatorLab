@@ -19,17 +19,17 @@ import netclasses.NetFxBuilding;
 
 public class ElevatorLab extends Application {
 
-    private final static int default_floorcount = 9;
-    private final static int default_passcount = 200;
-    private final static int default_elevcount = 6;
-    private final static int default_capacity = 20;
-    private final static int default_source = 0; //random value
-    private final static int default_destination = 0; //random value
+    private final static int default_floorcount = 9;  // количество этажей по умолчанию
+    private final static int default_passcount = 200; // количество пассажиров по умолчанию
+    private final static int default_elevcount = 6;   // количество лифтов по умолчанию
+    private final static int default_capacity = 20;   // вместимость лифтов по умолчанию
+    private final static int default_source = 0;      // random value
+    private final static int default_destination = 0; // random value
 
-    private final static int height = 800;
+    private final static int height = 800;            // размеры окна
     private final static int width = 1400;
 
-    private SearchEngine searchEngine;
+    private SearchEngine searchEngine;                // поисковик по именам и фамилиям
     private AnchorPane passengerPane;
     private AnchorPane statisticsPane;
 
@@ -43,6 +43,7 @@ public class ElevatorLab extends Application {
         root.getChildren().add(canvas);
         Scene scene = new Scene(root, width, height+20);
 
+        // панель с закладками
         TabPane tabpane = new TabPane();
         tabpane.setMinWidth(width);
         tabpane.setMinHeight(height+20);
@@ -75,10 +76,12 @@ public class ElevatorLab extends Application {
 
         root.getChildren().addAll(tabpane);
 
+        // таблица с именами и фамилиями перевезенных пассажиров
         TableView table = new TableView();
         table.setEditable(true);
         table.setMinHeight(height - 88);
 
+        // описание столбцов таблички
         TableColumn idCol = new TableColumn<FxPerson, Long>("ID");
         idCol.setMinWidth(width*0.05);
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -149,7 +152,10 @@ public class ElevatorLab extends Application {
         int source;
         int destination;
 
+        // все gui компоненты - в отдельную функцию
         CreateInterface(primaryStage);
+
+        // параметры командной строки
         if(getParameters().getNamed().get("passcount")==null)
             passcount = default_passcount;
         else

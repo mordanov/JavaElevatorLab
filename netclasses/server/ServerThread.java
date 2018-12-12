@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+// поток для каждого клиента сервера
 public class ServerThread extends Thread {
     private Socket socket;
     private BufferedReader in;

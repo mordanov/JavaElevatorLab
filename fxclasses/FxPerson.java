@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+// класс для отображения в таблице fx
 public class FxPerson {
     private final SimpleLongProperty id;
     private final SimpleStringProperty firstname;

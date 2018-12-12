@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Floor extends Outputter {
-    private final int number;                                 //номер этажа
-    private List<Passenger> passengers = new ArrayList<>();   //пассажиры, ждущие лифт
-    private List<Passenger> outpassengers = new ArrayList<>();
+    private final int number;                                  // номер этажа
+    private List<Passenger> passengers = new ArrayList<>();    // пассажиры, ждущие лифт
+    private List<Passenger> outpassengers = new ArrayList<>(); // пассажиры, доехавшие на лифте куда им нужно
     protected Building building;
 
-    private int source_pass_count = 0;
+    private int source_pass_count = 0;                         // счетчики
     private int destination_pass_count = 0;
 
-    protected final int maxvisiblepass = 10;
+    protected final int maxvisiblepass = 10;                   // сколько отображать пассажиров на этаже
 
     public Floor(int number, Building building) {
         this.number = number;
@@ -26,16 +26,12 @@ public class Floor extends Outputter {
         return number;
     }
 
-    public int getIndex() {
-        return number - 1;
-    }
-
     public List<Passenger> getOutpassengers() {
         return outpassengers;
     }
 
-    protected void drawFloorInPassenger(int passcount) {};
-    protected void drawFloorOutPassenger(int passcount) {}
+    protected void drawFloorInPassenger(int passcount) {};      // рисовать пассажиров ждущих лифт
+    protected void drawFloorOutPassenger(int passcount) {}      // рисовать пассажиров, доехавших на нужный этаж
     protected void floorInfo() {};
 
     @Override

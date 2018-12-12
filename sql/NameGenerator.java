@@ -13,8 +13,8 @@ public class NameGenerator {
     private PreparedStatement stmt = null;
     private Connection connection = null;
 
-    private String first;
-    private String second;
+    private String first;   // имя
+    private String second;  // фамилия
 
     private int idLaunch;
 
@@ -125,7 +125,4 @@ public class NameGenerator {
         return second;
     }
 
-    public int getIdLaunch() {
-        return idLaunch;
-    }
 }

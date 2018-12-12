@@ -1,5 +1,6 @@
 package classes.elements;
 
+// класс для стандартного вывода
 public abstract class Outputter {
 
     public abstract void outprintln(String message);

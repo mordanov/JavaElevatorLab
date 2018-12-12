@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+// сервер, принимающий клиентов
 public class NetServer implements Runnable {
     private int port;
     private ServerSocket ssocket;
@@ -29,10 +30,6 @@ public class NetServer implements Runnable {
         } catch(IOException e){
             e.printStackTrace();
         }
-    }
-
-    public ServerSocket getServerSocket() {
-        return ssocket;
     }
 
 

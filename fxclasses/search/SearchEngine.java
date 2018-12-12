@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class SearchEngine {
-    private HashMap<Long, FxPerson> sourcelist;
-    private HashMap<String, List<FxPerson>> sourcekeys;
+    private HashMap<Long, FxPerson> sourcelist;          // исходный список
+    private HashMap<String, List<FxPerson>> sourcekeys;  // список для поиска - каждое слово разбирается на 1,2,3 буквы и записывается индекс
     private String searchValue;
     private TableView tableView;
 

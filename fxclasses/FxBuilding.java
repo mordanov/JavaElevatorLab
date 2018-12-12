@@ -48,6 +48,7 @@ public class FxBuilding extends Building {
                 p.getDestination().getNumber(), p.getCreateTime(), 0, 0, 0));
     }
 
+    // отрисовать статистику на pane
     @Override
     public void stopService() {
         final CategoryAxis xAxis = new CategoryAxis();

@@ -59,6 +59,7 @@ public class FxElevator extends Elevator {
 
     }
 
+    // сколько пассажиров внутри
     private void setInText(int n) {
         if(n<10) {
             inCountText.setText("0"+String.valueOf(n));
@@ -92,6 +93,7 @@ public class FxElevator extends Elevator {
         });
     }
 
+    // нарисовать перемещение лифта
     @Override
     public void moveInfo(int source, int destination) {
         moveImage2NewLocation(source, destination, imageview);
@@ -107,6 +109,7 @@ public class FxElevator extends Elevator {
         });
     }
 
+    // рисовалка стрелки над лифтом
     private void moveImage2NewLocation(int source, int destination, ImageView ivd) {
         Platform.runLater(() -> {
             TranslateTransition tt = new TranslateTransition();
@@ -117,6 +120,7 @@ public class FxElevator extends Elevator {
         });
     }
 
+    // остановить лифт и запрозрачить его :)
     @Override
     public void finishInfo(Floor position) {
         FadeTransition ft = new FadeTransition();
